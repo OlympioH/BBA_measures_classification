@@ -12,12 +12,6 @@ import tensorflow as tf
 
 def sigmo(x):
     return (1/(1+tf.math.exp(-x)))
-
-def plot3Dmfold(X, Y): #plot a function Y=f(X) as a color map where X 3D array of the points coordinates in the sphere
-    fig=plt.figure()
-    ax=plt.axes(projection='3d')
-    surf=ax.scatter(X[:,0], X[:,1], X[:,2], c=Y)
-    fig.colorbar(surf,shrink=0.5, aspect=5)
     
 def rot(X, theta): #X 2D array
     c, s = np.cos(theta), np.sin(theta)
@@ -53,19 +47,7 @@ def is_in_rectangle(x, rectangle):
             return True
     return False
 
-def is_in_hypercube(x, hypercube): #hypercube has format (center, size) in Rd x R
-    center = hypercube[0]
-    size = hypercube[1]
-    if (center-size<=x).all():
-        if (center+size>=x).all():
-            return True
-    return False
-def count_hypercube (X, hypercube):
-    counter = 0
-    for x in X:
-        if is_in_hypercube(x, hypercube):
-            counter+=1
-    return counter
+
 def count_rectangle(X, rectangle, weight_function = lambda x:1):
     counter = 0
     for x in X:
